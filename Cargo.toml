@@ -8,4 +8,4 @@ edition = "2018"
 [dependencies]
 ggez = "0.5"
 rand = "0.7.2"
-cgmath = "0.17.0"
+cgmath = {version = "0.17.0", features = ["mint"]}

@@ -3,7 +3,7 @@
 use ggez::{graphics, Context, ContextBuilder, GameResult};
 use ggez::event::{self, EventHandler};
 use ggez::conf::WindowMode;
-use cgmath::Vector2;
+use cgmath::{Vector2, Point2};
 
 use ggez::input::mouse::MouseButton;
 use ggez::input::keyboard::KeyCode;
@@ -45,7 +45,7 @@ fn main() -> GameResult<()> {
 
 struct Sim {
     // Your state here...
-    view_offset: Vec2,
+    view_offset: Point2<f32>,
     view_scale: f32,
     last_mouse_pos: Vec2,
     timer: Timer,
@@ -62,7 +62,7 @@ impl Sim {
         timer.add(SECOND_UPDATE, 1.0, true);
 
         Ok(Sim {
-            view_offset: Vector2::new(0.0, 0.0),
+            view_offset: Point2::new(0.0, 0.0),
             view_scale: 10.0,
             last_mouse_pos: Vector2::new(0.0, 0.0),
             timer,
@@ -101,7 +101,7 @@ impl EventHandler for Sim {
 
         let mut center: Vec2 = graphics::size(ctx).into();
         center *= 0.5;
-        let view_offset = center + self.view_offset * self.view_scale;
+        let view_offset =self.view_offset * self.view_scale + center;
 
         let param = DrawParam::default().scale(Vec2::new(self.view_scale, self.view_scale)).dest(view_offset);
         graphics::set_transform(ctx, param.to_matrix());

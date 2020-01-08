@@ -13,22 +13,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48d5fd0d-72b3-4126-a704-3b0820207f73" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/ecs.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entities.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/toy-nn-rs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/toy-nn-rs.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/borders.rs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cars.rs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game_maths.rs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interval.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/interval.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ecs.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/toy_nn_lib/Cargo.toml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/toy_nn_lib/src/lib.rs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,6 +168,7 @@
       <workItem from="1575323142555" duration="53000" />
       <workItem from="1578263196468" duration="2814000" />
       <workItem from="1578423356704" duration="3460000" />
+      <workItem from="1578499891318" duration="1982000" />
     </task>
     <servers />
   </component>
@@ -197,10 +186,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="1085" y="422" key="#com.intellij.ide.util.MemberChooser" timestamp="1578424064016">
+    <state x="1085" y="422" key="#com.intellij.ide.util.MemberChooser" timestamp="1578501579616">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state x="1085" y="422" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1410@0.0.2560.1410" timestamp="1578424064016" />
+    <state x="1085" y="422" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1410@0.0.2560.1410" timestamp="1578501579616" />
     <state x="976" y="530" key="com.intellij.ide.util.TipDialog" timestamp="1578499891643">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>

@@ -2,10 +2,25 @@ use std::marker::PhantomData;
 use std::collections::HashMap;
 use ggez::graphics::{Mesh, MeshBuilder};
 use ggez::{Context};
+use std::hash::{Hash, Hasher};
 
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy)]
 pub struct Id<T> (usize, PhantomData<T>);
+
+impl<T> PartialEq for Id<T> {
+    fn eq(&self, other: &Self) -> bool {
+        self.0 == other.0
+    }
+}
+
+impl<T> Eq for Id<T> {}
+
+impl<T> Hash for Id<T> {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.0.hash(state);
+    }
+}
 
 pub struct Storage<T> {
     data: HashMap<Id<T>, T>,
@@ -22,7 +37,7 @@ impl<T> Storage<T> {
     }
 
     pub fn push(&mut self, component: T) -> Id<T> {
-        assert_eq!(self.data.insert(self.next_free_id, component), None);
+        assert!(self.data.insert(self.next_free_id, component).is_none());
         let this_id = self.next_free_id;
         self.next_free_id = Id(this_id.0 + 1, PhantomData);
         this_id
@@ -43,7 +58,7 @@ impl World {
         };
 
         let grid = Grid::new(ctx, &mut w.meshes);
-        w.
+        w.entities.push(Box::new(grid));
         w
     }
 }
