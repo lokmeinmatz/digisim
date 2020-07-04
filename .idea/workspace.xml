@@ -13,9 +13,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48d5fd0d-72b3-4126-a704-3b0820207f73" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/pieces.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ecs.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,8 +51,13 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Rust/Rust_Projects/spotify-lite" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Programmieren\GitHub\digisim" />
+    </key>
   </component>
   <component name="RunManager" selected="Cargo Command.Run toy_nn_rs">
     <configuration name="Check Project" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
@@ -82,7 +88,7 @@
     </configuration>
     <configuration name="Run toy_nn_rs" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
       <option name="channel" value="DEFAULT" />
-      <option name="command" value="run --package toy_nn_rs --bin toy_nn_rs" />
+      <option name="command" value="run" />
       <option name="allFeatures" value="false" />
       <option name="nocapture" value="false" />
       <option name="emulateTerminal" value="false" />
@@ -169,6 +175,13 @@
       <workItem from="1578263196468" duration="2814000" />
       <workItem from="1578423356704" duration="3460000" />
       <workItem from="1578499891318" duration="1982000" />
+      <workItem from="1578846223502" duration="7606000" />
+      <workItem from="1579036641191" duration="1853000" />
+      <workItem from="1579094743814" duration="652000" />
+      <workItem from="1579103648433" duration="1227000" />
+      <workItem from="1579212609835" duration="1041000" />
+      <workItem from="1579903178827" duration="22000" />
+      <workItem from="1586284360470" duration="213000" />
     </task>
     <servers />
   </component>
@@ -186,13 +199,37 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
+    <state x="734" y="360" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586284418484">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state x="734" y="360" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1440.-801.1440.2530/0.0.2560.1410@0.0.2560.1410" timestamp="1586284418484" />
     <state x="1085" y="422" key="#com.intellij.ide.util.MemberChooser" timestamp="1578501579616">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
     <state x="1085" y="422" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1410@0.0.2560.1410" timestamp="1578501579616" />
-    <state x="976" y="530" key="com.intellij.ide.util.TipDialog" timestamp="1578499891643">
+    <state width="2517" height="400" key="GridCell.Tab.0.bottom" timestamp="1586284575509">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state x="976" y="530" key="com.intellij.ide.util.TipDialog/0.0.2560.1410@0.0.2560.1410" timestamp="1578499891643" />
+    <state width="2517" height="400" key="GridCell.Tab.0.bottom/-1440.-801.1440.2530/0.0.2560.1410@0.0.2560.1410" timestamp="1586284575509" />
+    <state width="2517" height="400" key="GridCell.Tab.0.center" timestamp="1586284575509">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="2517" height="400" key="GridCell.Tab.0.center/-1440.-801.1440.2530/0.0.2560.1410@0.0.2560.1410" timestamp="1586284575509" />
+    <state width="2517" height="400" key="GridCell.Tab.0.left" timestamp="1586284575509">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="2517" height="400" key="GridCell.Tab.0.left/-1440.-801.1440.2530/0.0.2560.1410@0.0.2560.1410" timestamp="1586284575509" />
+    <state width="2517" height="400" key="GridCell.Tab.0.right" timestamp="1586284575509">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="2517" height="400" key="GridCell.Tab.0.right/-1440.-801.1440.2530/0.0.2560.1410@0.0.2560.1410" timestamp="1586284575509" />
+    <state x="976" y="530" key="com.intellij.ide.util.TipDialog" timestamp="1579903181758">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state x="976" y="530" key="com.intellij.ide.util.TipDialog/0.0.2560.1410@0.0.2560.1410" timestamp="1579903181758" />
+    <state width="600" height="424" key="javadoc.popup" timestamp="1578848708709">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="600" height="424" key="javadoc.popup/0.0.2560.1410@0.0.2560.1410" timestamp="1578848708709" />
   </component>
 </project>

@@ -3,9 +3,10 @@ use std::collections::HashMap;
 use ggez::graphics::{Mesh, MeshBuilder};
 use ggez::{Context};
 use std::hash::{Hash, Hasher};
+use crate::entities::World;
+use std::collections::hash_map::{Values, ValuesMut};
 
-
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug)]
 pub struct Id<T> (usize, PhantomData<T>);
 
 impl<T> PartialEq for Id<T> {
@@ -19,6 +20,14 @@ impl<T> Eq for Id<T> {}
 impl<T> Hash for Id<T> {
     fn hash<H: Hasher>(&self, state: &mut H) {
         self.0.hash(state);
+    }
+}
+
+impl<T> Copy for Id<T> {}
+
+impl<T> Clone for Id<T> {
+    fn clone(&self) -> Id<T> {
+        *self
     }
 }
 
@@ -42,55 +51,25 @@ impl<T> Storage<T> {
         self.next_free_id = Id(this_id.0 + 1, PhantomData);
         this_id
     }
-}
 
-pub struct World {
-    meshes: Storage<Mesh>,
-    entities: Storage<Box<dyn Entity>>,
 
-}
+    /// Returns the element if exists, None otherwise
+    pub fn get(&self, id: Id<T>) -> Option<&T> {
+        self.data.get(&id)
+    }
 
-impl World {
-    pub fn new(ctx: &mut Context) -> World {
-        let mut w = World {
-            meshes: Storage::new(),
-            entities: Storage::new()
-        };
+    pub fn iter(&self) -> Values<Id<T>, T> {
+        self.data.values()
+    }
 
-        let grid = Grid::new(ctx, &mut w.meshes);
-        w.entities.push(Box::new(grid));
-        w
+    pub fn iter_mut(&mut self) -> ValuesMut<Id<T>, T> {
+        self.data.values_mut()
     }
 }
 
+
 pub trait Entity {
-    fn render(&mut self, world: &World, ctx: &mut Context)-> ggez::GameResult<()>;
+    fn render(&self, world: &World, ctx: &mut Context)-> ggez::GameResult<()>;
     fn update(&mut self, world: &mut World, ctx: &mut Context) -> ggez::GameResult<()>;
 }
 
-
-pub struct Grid {
-    mesh_id: Id<Mesh>
-}
-
-impl Grid {
-    pub fn new(ctx: &mut Context, meshes: &mut Storage<Mesh>) -> Grid {
-
-        let mesh = MeshBuilder::new().build(ctx).unwrap();
-
-    }
-}
-
-impl Entity for Grid {
-    fn render(&mut self, world: &World, ctx: &mut Context) -> ggez::GameResult<()> {
-
-    }
-
-    fn update(&mut self, world: &mut World, ctx: &mut Context) -> ggez::GameResult<()> {
-
-    }
-}
-
-pub fn render(world: &World, ctx: &mut Context) -> ggez::GameResult<()> {
-    Ok(())
-}

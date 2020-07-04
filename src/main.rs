@@ -2,30 +2,46 @@
 
 use ggez::{graphics, Context, ContextBuilder, GameResult};
 use ggez::event::{self, EventHandler};
-use ggez::conf::WindowMode;
+use ggez::conf::{WindowMode, WindowSetup, NumSamples};
 use cgmath::{Vector2, Point2};
 
 use ggez::input::mouse::MouseButton;
-use ggez::input::keyboard::KeyCode;
 
 
 mod interval;
 mod ecs;
+mod entities;
 use interval::Timer;
-use ggez::graphics::DrawParam;
-use crate::ecs::World;
+use ggez::graphics::{DrawParam, DrawMode, Rect, Color};
+use crate::entities::World;
+use std::path;
 
 const SECOND_UPDATE: usize = 123;
 pub type Vec2 = Vector2<f32>;
 
 fn main() -> GameResult<()> {
     // Make a Context.
+    let resource_dir = if let Ok(manifest_dir) = std::env::var("CARGO_MANIFEST_DIR") {
+        let mut path = path::PathBuf::from(manifest_dir);
+        path.push("resources");
+        path
+    } else {
+        path::PathBuf::from("./resources")
+    };
+
     let (mut ctx, mut event_loop) = ContextBuilder::new(env!("CARGO_PKG_NAME"), env!("CARGO_PKG_AUTHORS"))
         .window_mode(WindowMode {
             width: 1920.0,
             height: 1080.0,
+            resizable: true,
             .. WindowMode::default()
         })
+        .window_setup(WindowSetup {
+            title: "ChessRS".to_owned(),
+            samples: NumSamples::Four,
+            .. WindowSetup::default()
+        })
+        .add_resource_path(resource_dir)
         .build()
         .expect("aieee, could not create ggez context!");
 
@@ -44,9 +60,6 @@ fn main() -> GameResult<()> {
 }
 
 struct Sim {
-    // Your state here...
-    view_offset: Point2<f32>,
-    view_scale: f32,
     last_mouse_pos: Vec2,
     timer: Timer,
     world: World
@@ -62,8 +75,6 @@ impl Sim {
         timer.add(SECOND_UPDATE, 1.0, true);
 
         Ok(Sim {
-            view_offset: Point2::new(0.0, 0.0),
-            view_scale: 10.0,
             last_mouse_pos: Vector2::new(0.0, 0.0),
             timer,
             world: World::new(ctx)
@@ -85,12 +96,6 @@ impl EventHandler for Sim {
         }
 
 
-        let speed = if ggez::input::keyboard::is_key_pressed(ctx, KeyCode::W) {1f32}
-        else if ggez::input::keyboard::is_key_pressed(ctx, KeyCode::S) {-1f32} else {0.0};
-
-        let steering = if ggez::input::keyboard::is_key_pressed(ctx, KeyCode::A) {-0.1}
-        else if ggez::input::keyboard::is_key_pressed(ctx, KeyCode::D) {0.1} else {0.0};
-
 
         std::thread::yield_now();
         Ok(())
@@ -99,36 +104,41 @@ impl EventHandler for Sim {
     fn draw(&mut self, ctx: &mut Context) -> GameResult<()> {
         graphics::clear(ctx, graphics::BLACK);
 
-        let mut center: Vec2 = graphics::size(ctx).into();
-        center *= 0.5;
-        let view_offset =self.view_offset * self.view_scale + center;
+        let (w, h) = graphics::drawable_size(ctx);
 
-        let param = DrawParam::default().scale(Vec2::new(self.view_scale, self.view_scale)).dest(view_offset);
+        let scale = w.min(h) / 8.0;
+
+        let offset = ((w / 8.0 - scale) * 4.0, (h / 8.0 - scale) * 4.0);
+
+        let param = DrawParam::default().scale(Vec2::new(scale, scale)).dest(cgmath::Point2::from(offset));
+        //let param = DrawParam::default();
+        graphics::push_transform(ctx, Some(param.to_matrix()));
         graphics::set_transform(ctx, param.to_matrix());
         graphics::apply_transformations(ctx);
 
-        //println!("{:?}", center);
+        if ggez::timer::ticks(ctx) % 100 == 0 {
+            println!("w {} h {}", w, h);
+            println!("scale {} offset {:?}", scale, offset);
+        }
 
+        self.world.render(ctx)?;
+        graphics::pop_transform(ctx);
         graphics::present(ctx)
+    }
+
+    fn resize_event(&mut self, ctx: &mut Context, width: f32, height: f32) {
+        let new_rect = graphics::Rect::new(
+            0.0,
+            0.0,
+            width,
+            height,
+        );
+        graphics::set_screen_coordinates(ctx, new_rect).unwrap();
     }
 
     fn mouse_motion_event(&mut self, ctx: &mut Context, x: f32, y: f32, _dx: f32, _dy: f32) {
         let m_pos = Vec2::new(x, y);
-        if ggez::input::mouse::button_pressed(ctx, MouseButton::Left) {
-            let move_delta = m_pos - self.last_mouse_pos;
-            self.view_offset += move_delta * (1.0 / self.view_scale);
-        }
         self.last_mouse_pos = m_pos;
     }
 
-
-    fn mouse_wheel_event(&mut self, ctx: &mut Context, x: f32, y: f32) {
-        if self.view_scale >= 1.0 {
-            self.view_scale += y * (self.view_scale / 2.0).sqrt();
-        }
-        else {
-            self.view_scale += y * (self.view_scale * 0.5f32.sqrt());
-        }
-        println!("scale: {}  | y: {}", self.view_scale, y);
-    }
 }
